@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +36,11 @@ public class Member extends BaseEntity {
     private List<MemberSnapshot> snapshotList = new ArrayList<>();
 
     //-- crate method --//
-    public static Member createMember(String provider, String username, String name, String about, String password, String profileImg, String email, String token) {
+    public static Member createMember(String provider, String username, String nickname, String about, String password, String profileImg, String email, String token) {
         return builder()
                 .provider(provider)
                 .username(username)
-                .nickname(name)
+                .nickname(nickname)
                 .about(about)
                 .password(password)
                 .profileImg(profileImg)
@@ -91,20 +88,4 @@ public class Member extends BaseEntity {
                 .platinum(this.getPlatinum() + dto.getPlatinum())
                 .build();
     }
-
-
-    //-- create authorize --//
-    public List<? extends GrantedAuthority> getGrantedAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-
-        // 모든 회원에게 member 권한 부여 //
-        grantedAuthorities.add(new SimpleGrantedAuthority("member"));
-
-        // admin 권한 부여 //
-        if ("admin".equals(username))
-            grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
-
-        return grantedAuthorities;
-    }
-
 }
