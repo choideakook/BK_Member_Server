@@ -1,6 +1,5 @@
 package com.baeker.member.member.in.contorller;
 
-import com.baeker.member.base.request.Rq;
 import com.baeker.member.member.domain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
