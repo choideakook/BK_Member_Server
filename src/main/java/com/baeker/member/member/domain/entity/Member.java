@@ -37,7 +37,7 @@ public class Member extends BaseEntity {
     private List<MemberSnapshot> snapshotList = new ArrayList<>();
 
     //-- crate method --//
-    protected static Member createMember(String provider, String username, String name, String about, String password, String profileImg, String email, String token) {
+    public static Member createMember(String provider, String username, String name, String about, String password, String profileImg, String email, String token) {
         return builder()
                 .provider(provider)
                 .username(username)
@@ -56,7 +56,7 @@ public class Member extends BaseEntity {
     //-- business logic --//
 
     // name, about, profileImg 수정 //
-    protected Member modifyMember(String name, String about, String img) {
+    public Member modifyMember(String name, String about, String img) {
         return this.toBuilder()
                 .nickname(name)
                 .about(about)
@@ -67,19 +67,19 @@ public class Member extends BaseEntity {
     }
 
     // 첫방문 회원 체크 //
-    protected void joinComplete() {
+    public void joinComplete() {
         this.newMember = false;
     }
 
     // 백준 아이디 등록 //
-    protected Member connectBaekJoon(String baekJoonName) {
+    public Member connectBaekJoon(String baekJoonName) {
         return this.toBuilder()
                 .baekJoonName(baekJoonName)
                 .build();
     }
 
     // 백준 점수 최신화 //
-    protected Member updateBaeJoon(BaekJoonDto dto) {
+    public Member updateBaeJoon(BaekJoonDto dto) {
         return this.toBuilder()
                 .bronze(this.getBronze() + dto.getBronze())
                 .sliver(this.getSliver() + dto.getSliver())
