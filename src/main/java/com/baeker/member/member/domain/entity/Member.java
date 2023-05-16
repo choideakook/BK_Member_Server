@@ -28,7 +28,7 @@ public class Member extends BaseEntity {
     private String password;
     private String provider;
     private String email;
-    private String accessToken;
+    private String token;
     private boolean newMember;
 
     @Builder.Default
@@ -46,7 +46,7 @@ public class Member extends BaseEntity {
                 .profileImg(profileImg)
                 .kakaoProfileImage(profileImg)
                 .email(email)
-                .accessToken(token)
+                .token(token)
                 .newMember(true)
                 .build();
     }

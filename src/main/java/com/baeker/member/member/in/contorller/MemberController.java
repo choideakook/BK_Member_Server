@@ -35,6 +35,7 @@ public class MemberController {
     }
 
     //-- create --//
+
     @PostMapping("create")
     public RsData<Member> create(@RequestBody MemberJoinDto dto) {
         log.info("member 생성 요청 확인 username = {}", dto.getUsername());

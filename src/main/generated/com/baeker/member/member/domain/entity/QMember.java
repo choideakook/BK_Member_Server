@@ -24,8 +24,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath about = createString("about");
 
-    public final StringPath accessToken = createString("accessToken");
-
     public final StringPath baekJoonName = createString("baekJoonName");
 
     //inherited
@@ -70,6 +68,8 @@ public class QMember extends EntityPathBase<Member> {
     public final NumberPath<Integer> sliver = _super.sliver;
 
     public final ListPath<MemberSnapshot, QMemberSnapshot> snapshotList = this.<MemberSnapshot, QMemberSnapshot>createList("snapshotList", MemberSnapshot.class, QMemberSnapshot.class, PathInits.DIRECT2);
+
+    public final StringPath token = createString("token");
 
     public final StringPath username = createString("username");
 

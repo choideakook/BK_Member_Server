@@ -5,7 +5,6 @@ import com.baeker.member.member.domain.dto.MemberJoinDto;
 import com.baeker.member.member.domain.entity.Member;
 import com.baeker.member.member.out.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,18 +16,14 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final PasswordEncoder encoder;
 
-
-    public Optional<Member> getMember(String username) {
-        return null;
-    }
 
     /**
      * create method **
      */
 
     //-- create member --//
+    @Transactional
     public RsData<Member> create(MemberJoinDto dto) {
         if (findByUsername(dto.getUsername()).isSuccess())
             return RsData.of("F-1", "이미 존재하는 username");
