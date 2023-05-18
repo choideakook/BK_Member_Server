@@ -8,9 +8,6 @@ on:  # 우선 main 브랜치만 설정 했지만 dev 브랜치 하나 생성(건
   push:
     branches:
 
-env:
-  SPRING_BOOT_VERSION: 3.0.6
-
 jobs:
   test:
     runs-on: ubuntu-latest
