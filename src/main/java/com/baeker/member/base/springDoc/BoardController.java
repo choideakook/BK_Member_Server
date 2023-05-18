@@ -13,9 +13,8 @@ public class BoardController {
 
     @Bean
     public OpenAPI api() {
-        Info info = new Info().title("").version("v3").description("aaa");
+        Info info = new Info().title("").version("v3").description("BAEKER-MSA : Member Server Endpoint");
 
         return new OpenAPI().components(new Components()).info(info);
     }
-
 }
