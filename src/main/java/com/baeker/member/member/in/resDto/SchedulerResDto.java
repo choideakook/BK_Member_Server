@@ -1,10 +1,10 @@
-package com.baeker.member.member.in.dto;
+package com.baeker.member.member.in.resDto;
 
 import com.baeker.member.member.domain.entity.Member;
 import lombok.Data;
 
 @Data
-public class SchedulerDto {
+public class SchedulerResDto {
 
     private Long id;
     private String baekJoonName;
@@ -16,7 +16,7 @@ public class SchedulerDto {
     private int platinum;
     private int solvedBaekJoon;
 
-    public SchedulerDto(Member member) {
+    public SchedulerResDto(Member member) {
         this.id = member.getId();
         this.baekJoonName = member.getBaekJoonName();
         this.bronze = member.getBronze();

@@ -88,4 +88,13 @@ public class Member extends BaseEntity {
                 .platinum(this.getPlatinum() + dto.getPlatinum())
                 .build();
     }
+
+    // nickname, about, profile img 수정 //
+    public Member update(String nickname, String about, String profileImg) {
+        return this.toBuilder()
+                .nickname(nickname)
+                .about(about)
+                .profileImg(profileImg)
+                .build();
+    }
 }

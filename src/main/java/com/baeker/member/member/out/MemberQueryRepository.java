@@ -20,6 +20,7 @@ public class MemberQueryRepository {
     //-- 백준 연동한 모든 회원 조회 --//
     public List<Member> findAllConBJ() {
         QMember member = QMember.member;
+
         return query
                 .selectFrom(member)
                 .where(member.baekJoonName.isNotNull())

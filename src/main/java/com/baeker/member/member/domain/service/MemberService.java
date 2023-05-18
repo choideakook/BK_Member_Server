@@ -2,8 +2,10 @@ package com.baeker.member.member.domain.service;
 
 import com.baeker.member.base.exception.InvalidDuplicateException;
 import com.baeker.member.base.exception.NotFoundException;
-import com.baeker.member.member.domain.dto.MemberJoinDto;
+import com.baeker.member.member.in.reqDto.ConBjReqDto;
+import com.baeker.member.member.in.reqDto.JoinReqDto;
 import com.baeker.member.member.domain.entity.Member;
+import com.baeker.member.member.in.reqDto.UpdateReqDto;
 import com.baeker.member.member.out.MemberQueryRepository;
 import com.baeker.member.member.out.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,17 +25,17 @@ public class MemberService {
 
 
     /**
-     * create method **
+     * * create method **
      * member 객체 생성
      */
 
     //-- create member --//
     @Transactional
-    public Member create(MemberJoinDto dto) {
+    public Member create(JoinReqDto dto) {
 
         try {
-            if (findByUsername(dto.getUsername()) != null)
-                throw new InvalidDuplicateException("이미 존재하는 username 입니다.");
+            this.findByUsername(dto.getUsername());
+            throw new InvalidDuplicateException("이미 존재하는 username 입니다.");
         } catch (NotFoundException e) {}
 
         Member member = Member.createMember(dto.getProvider(), dto.getUsername(), dto.getNickName(), "", dto.getPassword(), dto.getProfileImage(), dto.getEmail(), dto.getToken());
@@ -42,9 +44,11 @@ public class MemberService {
 
 
     /**
-     * read method **
+     * * read method **
      * find by username
      * find all
+     * find by id
+     * find by 백준 name
      */
 
     //-- find by username --//
@@ -62,8 +66,64 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+
     //-- find all 백준 연동한 사람만 --//
     public List<Member> findAllConBJ() {
         return memberQueryRepository.findAllConBJ();
+    }
+
+
+    //-- find by id --//
+    public Member findById(Long id) {
+        Optional<Member> byId = memberRepository.findById(id);
+
+        if (byId.isPresent())
+            return byId.get();
+
+        throw new NotFoundException("존재하지 않는 id / id = " + id);
+    }
+
+    //-- find by 백준 name --//
+    public Member findByBaekJoonName(String baekJoonName) {
+        Optional<Member> byBaekJoonName = memberRepository.findByBaekJoonName(baekJoonName);
+
+        if (byBaekJoonName.isPresent())
+            return byBaekJoonName.get();
+
+        throw new NotFoundException("존재하지 않는 백준 name / name = " + baekJoonName);
+    }
+
+
+    /**
+     * * Update method **
+     * nickname, about, profile img 수정
+     */
+
+    //-- nickname, about, profile img 수정 --//
+    @Transactional
+    public Member update(UpdateReqDto dto) {
+
+        Member member = this.findById(dto.getId())
+                .update(
+                        dto.getNickname(),
+                        dto.getAbout(),
+                        dto.getProfileImg()
+                );
+
+        return memberRepository.save(member);
+    }
+
+    //-- 백준 연동 --//
+    public String conBJ(ConBjReqDto dto) {
+
+        try {
+            this.findByBaekJoonName(dto.getBaekJoonName());
+            throw new InvalidDuplicateException(dto.getBaekJoonName() + "은 이미 연동된 백준 id 입니다.");
+        } catch (NotFoundException e) {}
+
+        Member member = this.findById(dto.getId())
+                .connectBaekJoon(dto.getBaekJoonName());
+
+        return memberRepository.save(member).getBaekJoonName();
     }
 }

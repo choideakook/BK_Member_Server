@@ -3,8 +3,8 @@ package com.baeker.member.member.in.contorller;
 import com.baeker.member.base.request.RsData;
 import com.baeker.member.member.domain.entity.Member;
 import com.baeker.member.member.domain.service.MemberService;
-import com.baeker.member.member.in.dto.MemberDto;
-import com.baeker.member.member.in.dto.SchedulerDto;
+import com.baeker.member.member.in.resDto.MemberDto;
+import com.baeker.member.member.in.resDto.SchedulerResDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,7 @@ public class MemberFindController {
         return RsData.successOf(dto);
     }
 
+
     //-- find all --//
     @GetMapping("/all")
     public RsData findAll() {
@@ -45,8 +46,8 @@ public class MemberFindController {
             return RsData.of("S-1", "저장된 member 없음");
         }
 
-        List<SchedulerDto> dtoList = members.stream()
-                .map(m -> new SchedulerDto(m)).toList();
+        List<SchedulerResDto> dtoList = members.stream()
+                .map(m -> new SchedulerResDto(m)).toList();
 
         log.info("응답 완료 count = {}", dtoList.size());
         return RsData.of("S-1", "count = " + dtoList.size(), dtoList);

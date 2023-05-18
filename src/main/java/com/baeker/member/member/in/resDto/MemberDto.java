@@ -1,4 +1,4 @@
-package com.baeker.member.member.in.dto;
+package com.baeker.member.member.in.resDto;
 
 import com.baeker.member.member.domain.entity.Member;
 import lombok.AllArgsConstructor;
