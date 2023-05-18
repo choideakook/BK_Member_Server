@@ -60,7 +60,7 @@ public class MemberFindController {
 
     //-- find all for paging --//
     @GetMapping("/v1/pageAll")
-    public RsData findAll(@RequestBody @Valid PageReqDto dto) {
+    public RsData findAll(@ModelAttribute @Valid PageReqDto dto) {
         log.info("find all 페이징 요청 확인 / page = {}", dto.getPage());
 
         List<MemberDto> dtoList = memberService.getAll(dto)

@@ -1,11 +1,14 @@
 package com.baeker.member.member.in.reqDto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class ConBjReqDto {
 
+    @NotNull
     private Long id;
-    private String BaekJoonName;
+    @NotNull
+    private String baekJoonName;
 
 }
