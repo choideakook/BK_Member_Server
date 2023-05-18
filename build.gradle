@@ -39,7 +39,7 @@ dependencies {
 
 	// spring doc open api
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.5'
+
 
 
 	// jasypt 암호화
