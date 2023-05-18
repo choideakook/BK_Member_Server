@@ -1,6 +1,7 @@
 package com.baeker.member.member.in.resDto;
 
 import com.baeker.member.member.domain.entity.Member;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
 
 @Data
@@ -16,15 +17,22 @@ public class SchedulerResDto {
     private int platinum;
     private int solvedBaekJoon;
 
-    public SchedulerResDto(Member member) {
-        this.id = member.getId();
-        this.baekJoonName = member.getBaekJoonName();
-        this.bronze = member.getBronze();
-        this.sliver = member.getSliver();
-        this.gold = member.getGold();
-        this.diamond = member.getDiamond();
-        this.ruby = member.getRuby();
-        this.platinum = member.getPlatinum();
-        this.solvedBaekJoon = member.solvedBaekJoon();
+    //-- get solved count --//
+    private int getSolved() {
+        return bronze + sliver + gold + diamond + ruby + platinum;
+    }
+
+    //-- mapping query dsl --//
+    @QueryProjection
+    public SchedulerResDto(Long id, String baekJoonName, int bronze, int sliver, int gold, int diamond, int ruby, int platinum) {
+        this.id = id;
+        this.baekJoonName = baekJoonName;
+        this.bronze = bronze;
+        this.sliver = sliver;
+        this.gold = gold;
+        this.diamond = diamond;
+        this.ruby = ruby;
+        this.platinum = platinum;
+        this.solvedBaekJoon = getSolved();
     }
 }

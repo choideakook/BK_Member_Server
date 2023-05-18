@@ -2,6 +2,9 @@ package com.baeker.member.member.out;
 
 import com.baeker.member.member.domain.entity.Member;
 import com.baeker.member.member.domain.entity.QMember;
+import com.baeker.member.member.in.resDto.QSchedulerResDto;
+import com.baeker.member.member.in.resDto.SchedulerResDto;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Repository;
@@ -18,12 +21,14 @@ public class MemberQueryRepository {
     }
 
     //-- 백준 연동한 모든 회원 조회 --//
-    public List<Member> findAllConBJ() {
-        QMember member = QMember.member;
+    public List<SchedulerResDto> findAllConBJ() {
+        QMember m = QMember.member;
 
         return query
-                .selectFrom(member)
-                .where(member.baekJoonName.isNotNull())
+                .select(new QSchedulerResDto(m.id, m.baekJoonName, m.bronze, m.sliver, m.gold, m.diamond, m.ruby, m.platinum))
+                .from(m)
+                .where(m.baekJoonName.isNotNull())
                 .fetch();
     }
 }
+

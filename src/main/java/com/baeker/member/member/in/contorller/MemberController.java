@@ -23,7 +23,7 @@ public class MemberController {
     private final MemberService memberService;
 
     //-- create --//
-    @PostMapping("/create")
+    @PostMapping("/v1/create")
     public RsData create(@RequestBody @Valid JoinReqDto dto) {
         log.info("member 생성 요청 확인 username = {}", dto.getUsername());
 
@@ -35,7 +35,7 @@ public class MemberController {
     }
 
     //-- update 닉네임, 소개,프로필 사진 --//
-    @PostMapping("/update")
+    @PostMapping("/v1/update")
     public RsData update(@RequestBody @Valid UpdateReqDto dto) {
         log.info("member update 요청 확인 id = {}", dto.getId());
 
@@ -47,7 +47,7 @@ public class MemberController {
     }
 
     //-- 백준 연동 --//
-    @PostMapping("/con_baekjoon")
+    @PostMapping("/v1/connect")
     public RsData conBk(@RequestBody @Valid ConBjReqDto dto) {
         log.info("백준 id 연동 요청 확인 id = {} / 백준 name = {}", dto.getId(), dto.getBaekJoonName());
 
