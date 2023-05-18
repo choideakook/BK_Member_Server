@@ -1,4 +1,4 @@
-package com.baeker.member.member.in.dto;
+package com.baeker.member.member.in.resDto;
 
 import com.baeker.member.member.domain.entity.Member;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,6 @@ public class MemberDto {
     private String about;
     private String profileImg;
     private String kakaoProfileImage;
-    private String password;
     private String provider;
     private String email;
     private String token;
@@ -52,7 +51,6 @@ public class MemberDto {
         this.about = member.getAbout();
         this.profileImg = member.getProfileImg();
         this.kakaoProfileImage = member.getKakaoProfileImage();
-        this.password = member.getPassword();
         this.provider = member.getProvider();
         this.email = member.getEmail();
         this.token = member.getToken();
