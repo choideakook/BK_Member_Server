@@ -47,3 +47,4 @@ jobs:
       - name: deploy run
         run: |
           sh /home/centos/dep/docker/run.sh
+
