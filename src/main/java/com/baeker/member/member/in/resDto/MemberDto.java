@@ -26,6 +26,7 @@ public class MemberDto {
     private String username;
     private String nickname;
     private String baekJoonName;
+    private String password;
     private String about;
     private String profileImg;
     private String kakaoProfileImage;
@@ -49,6 +50,7 @@ public class MemberDto {
         this.nickname = member.getNickname();
         this.baekJoonName = member.getBaekJoonName();
         this.about = member.getAbout();
+        this.password = member.getPassword();
         this.profileImg = member.getProfileImg();
         this.kakaoProfileImage = member.getKakaoProfileImage();
         this.provider = member.getProvider();
